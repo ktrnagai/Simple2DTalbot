@@ -72,12 +72,12 @@ def Integration(PDx, PDy):
     ky = [(ky0-n)/n for ky0 in range(n*2)]
     kxx, kyy = np.meshgrid(kx,ky)
     
-    # 積分の実行
     with np.errstate(divide = "ignore", invalid="ignore"):
         OP = 1.0/(pi*i*(kxx+i*kyy))
         OP = np.fft.ifftshift(OP)
         OP[np.isnan(OP)]=0.0
-    
+
+    # 積分の実行
     IFT2=np.fft.ifft2(FA*OP)
     return np.real(IFT2[0:n, 0:n])    
     
